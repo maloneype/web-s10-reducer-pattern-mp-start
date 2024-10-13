@@ -45,10 +45,9 @@ export default function QuoteForm({ createQuote }) {
   };
   const onNewQuote = () => {
     // 👇 implement
-    createQuote(
-      state.author, state.quoteText
-    );
-    // resetForm();
+    event.preventDefault();
+    createQuote({ authorName: state.author, quoteText: state.quoteText });
+    resetForm();
   };
 
   useEffect(() => {

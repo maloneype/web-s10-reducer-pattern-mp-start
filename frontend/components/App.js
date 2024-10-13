@@ -34,7 +34,7 @@ const initialState = {
     },
   ],
   highlightedQuote: 0,
-  hideFakeQuotes: false,
+  displayAllQuotes: true,
 };
 
 const reducer = (state, action) => {
@@ -49,7 +49,7 @@ const reducer = (state, action) => {
     case SET_HIGHLIGHTED_QUOTE:
       return { ...state, highlightedQuote: action.payload };
     case TOGGLE_VISIBILITY:
-      return { ...state, hideFakeQuotes: action.payload };
+      return { ...state, displayAllQuotes: action.payload };
     default:
       return state;
   }
@@ -84,7 +84,7 @@ export default function App() {
     dispatch({ type: SET_HIGHLIGHTED_QUOTE, payload: id });
   };
   const toggleVisibility = () => {
-    dispatch({ type: TOGGLE_VISIBILITY, payload: !state.hideFakeQuotes });
+    dispatch({ type: TOGGLE_VISIBILITY, payload: !state.displayAllQuotes });
   };
 
   // 👇 useEffect to log the state whenever it updates
