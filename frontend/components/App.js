@@ -66,7 +66,6 @@ export default function App() {
       authorName: authorName,
       apocryphal: false,
     };
-    console.log(newQuote);
     dispatch({ type: CREATE_QUOTE, payload: newQuote });
   };
   const deleteQuote = (id) => {
@@ -86,11 +85,6 @@ export default function App() {
   const toggleVisibility = () => {
     dispatch({ type: TOGGLE_VISIBILITY, payload: !state.displayAllQuotes });
   };
-
-  // 👇 useEffect to log the state whenever it updates
-  useEffect(() => {
-    console.log("State updated:", state);
-  }, [state]); // 👈 this runs the effect every time `state` changes
 
   return (
     <div id="mp">

@@ -50,10 +50,6 @@ export default function QuoteForm({ createQuote }) {
     resetForm();
   };
 
-  useEffect(() => {
-    console.log("quote form state updated: ", state);
-  }, [state]);
-
   // 👇 some props are missing in the JSX below:
   return (
     <form id="quoteForm" onSubmit={onNewQuote}>

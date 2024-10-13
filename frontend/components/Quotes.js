@@ -10,7 +10,6 @@ export default function Quotes({
   setHighlightedQuote,
   toggleVisibility,
 }) {
-  console.log("display quotes:", displayAllQuotes);
   return (
     <div id="quotes">
       <h3>Quotes</h3>
