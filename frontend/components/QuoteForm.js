@@ -43,9 +43,9 @@ export default function QuoteForm({ createQuote }) {
     // 👇 implement
     dispatch({ type: RESET_FORM });
   };
-  const onNewQuote = () => {
+  const onNewQuote = (evt) => {
     // 👇 implement
-    event.preventDefault();
+    evt.preventDefault();
     createQuote({ authorName: state.author, quoteText: state.quoteText });
     resetForm();
   };
