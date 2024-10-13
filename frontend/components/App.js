@@ -47,9 +47,13 @@ const reducer = (state, action) => {
     case EDIT_QUOTE_AUTHENTICITY:
       return { ...state, quotes: action.payload };
     case SET_HIGHLIGHTED_QUOTE:
-      return { ...state, highlightedQuote: action.payload };
+      return {
+        ...state,
+        highlightedQuote:
+          action.payload === state.highlightedQuote ? null : action.payload,
+      };
     case TOGGLE_VISIBILITY:
-      return { ...state, displayAllQuotes: action.payload };
+      return { ...state, displayAllQuotes: !state.displayAllQuotes };
     default:
       return state;
   }
@@ -83,7 +87,7 @@ export default function App() {
     dispatch({ type: SET_HIGHLIGHTED_QUOTE, payload: id });
   };
   const toggleVisibility = () => {
-    dispatch({ type: TOGGLE_VISIBILITY, payload: !state.displayAllQuotes });
+    dispatch({ type: TOGGLE_VISIBILITY });
   };
 
   return (

@@ -1,26 +1,24 @@
-import React, { useReducer, useEffect } from "react"; // 👈 you'll need the reducer hook
+import React, { useReducer } from "react"; // 👈 you'll need the reducer hook
 
 // 👇 these are the types of actions that can change state
-const CHANGE_AUTHOR = "CHANGE_AUTHOR";
-const CHANGE_QUOTE = "CHANGE_QUOTE";
+const CHANGE_INPUT = "CHANGE_INPUT";
 const RESET_FORM = "RESET_FORM";
 
 // 👇 create your initial state object here
 const initialState = {
-  author: "",
+  authorName: "",
   quoteText: "",
 };
 
 // 👇 create your reducer function here
 const reducer = (state, action) => {
   switch (action.type) {
-    case CHANGE_AUTHOR:
-      return { ...state, author: action.payload };
-    case CHANGE_QUOTE:
-      return { ...state, quoteText: action.payload };
+    case CHANGE_INPUT: {
+      const { name, value } = action.payload;
+      return { ...state, [name]: value };
+    }
     case RESET_FORM:
-      return { ...state, author: "", quoteText: "" };
-      return state;
+      return { ...state, authorName: "", quoteText: "" };
     default:
       return state;
   }
@@ -31,14 +29,14 @@ export default function QuoteForm({ createQuote }) {
   // 👇 use the reducer hook to spin up state and dispatch
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const onChangeAuthor = (evt) => {
-    // 👇 implement
-    dispatch({ type: CHANGE_AUTHOR, payload: evt.target.value });
+  const onChange = ({target: {name, value}}) => {
+    //👇 implement
+    dispatch({
+      type: CHANGE_INPUT,
+      payload: { name, value },
+    });
   };
-  const onChangeQuote = (evt) => {
-    // 👇 implement
-    dispatch({ type: CHANGE_QUOTE, payload: evt.target.value });
-  };
+
   const resetForm = () => {
     // 👇 implement
     dispatch({ type: RESET_FORM });
@@ -46,7 +44,7 @@ export default function QuoteForm({ createQuote }) {
   const onNewQuote = (evt) => {
     // 👇 implement
     evt.preventDefault();
-    createQuote({ authorName: state.author, quoteText: state.quoteText });
+    createQuote({ authorName: state.authorName, quoteText: state.quoteText });
     resetForm();
   };
 
@@ -60,8 +58,8 @@ export default function QuoteForm({ createQuote }) {
           type="text"
           name="authorName"
           placeholder="type author name"
-          onChange={onChangeAuthor}
-          value={state.author}
+          onChange={onChange}
+          value={state.authorName}
         />
       </label>
       <label>
@@ -70,7 +68,7 @@ export default function QuoteForm({ createQuote }) {
           type="text"
           name="quoteText"
           placeholder="type quote"
-          onChange={onChangeQuote}
+          onChange={onChange}
           value={state.quoteText}
         />
       </label>
